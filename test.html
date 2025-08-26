@@ -52,20 +52,17 @@
           { title: "Entry 2", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
         ]
       }
-      // Add more chapters here
     ];
 
-    const LINES_PER_PAGE = 47;
-
+    const LINES_PER_PAGE = 120;
     const container = document.getElementById("diary-container");
     let pages = [];
     let currentPage = 0;
 
     async function loadDiary() {
       for (let chapter of chapters) {
-        let chapterLines = [];
-        // Add chapter title as first line
-        chapterLines.push(`chapter-title:${chapter.title}`);
+        let chapterContent = [];
+        chapterContent.push(`chapter-title:${chapter.title}`);
         for (let gist of chapter.gists) {
           try {
             const res = await fetch(gist.url);
@@ -76,31 +73,36 @@
               theme = 'theme-' + lines[0].split(':')[1].trim();
               lines.shift();
             }
-            // Add gist subheading
-            chapterLines.push(`gist-title:${gist.title}`);
-            chapterLines.push(...lines);
-            // Split chapterLines into pages of LINES_PER_PAGE
-            while (chapterLines.length > 0) {
-              const pageLines = chapterLines.splice(0, LINES_PER_PAGE);
-              const pageDiv = document.createElement("div");
-              pageDiv.className = `page ${theme}`;
-              let htmlContent = "";
-              for (let line of pageLines) {
-                if (line.startsWith("chapter-title:")) {
-                  htmlContent += `<div class="chapter-title">${line.replace("chapter-title:", "")}</div>`;
-                } else if (line.startsWith("gist-title:")) {
-                  htmlContent += `<div class="gist-title">${line.replace("gist-title:", "")}</div>`;
-                } else {
-                  htmlContent += `<p>${line}</p>`;
-                }
-              }
-              pageDiv.innerHTML = htmlContent;
-              container.appendChild(pageDiv);
-              pages.push(pageDiv);
-            }
+            // Add gist title
+            chapterContent.push(`gist-title:${gist.title}`);
+            // Append all lines
+            chapterContent.push(...lines);
           } catch (err) {
             console.error("Failed to fetch gist:", gist.url, err);
           }
+        }
+
+        // Now split chapterContent into pages of LINES_PER_PAGE
+        let tempLines = [...chapterContent];
+        while (tempLines.length > 0) {
+          const pageLines = tempLines.splice(0, LINES_PER_PAGE);
+          const pageDiv = document.createElement("div");
+          pageDiv.className = `page theme-white-slow`; // default theme
+          let htmlContent = "";
+          for (let line of pageLines) {
+            if (line.startsWith("chapter-title:")) {
+              htmlContent += `<div class="chapter-title">${line.replace("chapter-title:", "")}</div>`;
+            } else if (line.startsWith("gist-title:")) {
+              htmlContent += `<div class="gist-title">${line.replace("gist-title:", "")}</div>`;
+            } else if (line.startsWith("theme-")) {
+              pageDiv.className = `page ${line}`;
+            } else {
+              htmlContent += `<p>${line}</p>`;
+            }
+          }
+          pageDiv.innerHTML = htmlContent;
+          container.appendChild(pageDiv);
+          pages.push(pageDiv);
         }
       }
       showPage(0);
