@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Diary Book</title>
+  <title>My Diary 💖</title>
   <style>
     * {
       margin: 0;
@@ -12,7 +12,7 @@
     }
     
     body { 
-      background: #8b5a2b;
+      background: #6d4c41; /* Book shelf color */
       font-family: 'Cormorant Garamond', Georgia, serif; 
       display: flex; 
       justify-content: center; 
@@ -21,144 +21,215 @@
       margin: 0; 
       padding: 20px;
       color: #333;
-      overflow: hidden;
+      perspective: 1500px;
     }
     
     .book-container {
-      width: 90%;
-      max-width: 800px;
-      height: 80vh;
       position: relative;
+      width: 800px;
+      height: 600px;
+      transform-style: preserve-3d;
     }
     
     .book {
       position: relative;
       width: 100%;
       height: 100%;
-      display: flex;
-      background: #5c3317;
-      border-radius: 15px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-      overflow: hidden;
+      transform-style: preserve-3d;
+      transition: transform 0.5s;
     }
     
-    .page-container {
-      width: 50%;
-      height: 100%;
-      padding: 20px;
-      box-sizing: border-box;
-      position: relative;
-    }
-    
-    .page {
+    #diary-container { 
       width: 100%;
       height: 100%;
-      background: #f8f0e0;
-      padding: 35px 40px;
-      overflow: hidden;
-      box-sizing: border-box;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      border: 1px solid #d4b483;
+      background: #f8f0e3; /* Old paper color */
+      padding: 40px 60px; 
+      border-radius: 5px 15px 15px 5px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), 
+                  inset 0 -1px 0 rgba(0,0,0,0.1),
+                  inset 0 1px 0 rgba(255,255,255,0.3);
+      overflow: hidden; 
+      position: relative;
       display: flex;
       flex-direction: column;
+      border: 1px solid #d9c7a7;
     }
     
-    .left-page {
-      border-radius: 10px 5px 5px 10px;
+    /* Paper texture effect */
+    #diary-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0,0,0,0.03) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.3;
     }
     
-    .right-page {
-      border-radius: 5px 10px 10px 5px;
+    /* Book binding effect */
+    #diary-container::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 20px;
+      background: linear-gradient(to right, 
+        rgba(0,0,0,0.2) 0%, 
+        rgba(0,0,0,0.1) 5px, 
+        rgba(0,0,0,0.05) 10px, 
+        transparent 15px);
+      border-radius: 5px 0 0 5px;
     }
     
-    .page-content {
-      height: 100%;
-      overflow: hidden;
-      font-size: 18px;
-      line-height: 1.5;
-      color: #5c3317;
-      text-align: justify;
-      padding: 15px;
+    .diary-header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba(233, 30, 99, 0.2);
       position: relative;
+      z-index: 2;
     }
     
-    .page-content p { 
-      white-space: pre-line; 
-      line-height: 1.5;
-      margin-bottom: 15px;
-      text-align: justify;
-      font-size: 18px;
+    .diary-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #8d6e63;
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+      text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+    }
+    
+    .diary-subtitle {
+      font-size: 16px;
+      color: #8d6e63;
+      font-style: italic;
+    }
+    
+    #content-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px 5px;
+      scrollbar-width: thin;
+      scrollbar-color: #8d6e63 #f9f9f9;
+      position: relative;
+      z-index: 2;
+    }
+    
+    #content-area::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    #content-area::-webkit-scrollbar-track {
+      background: #f9f9f9;
+      border-radius: 10px;
+    }
+    
+    #content-area::-webkit-scrollbar-thumb {
+      background: #8d6e63;
+      border-radius: 10px;
+    }
+    
+    .page { 
+      display: none; 
+      width: 100%; 
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .page.active { 
+      display: block; 
     }
     
     .chapter-title { 
       text-align: center; 
-      font-size: 26px; 
+      font-size: 24px; 
       font-weight: bold; 
-      color: #8b0000; 
-      margin-bottom: 25px; 
+      color: #5d4037; 
+      margin-bottom: 20px; 
       padding-bottom: 10px;
-      border-bottom: 2px solid #d4b483;
+      border-bottom: 2px dashed #d7ccc8;
+      position: relative;
     }
     
-    .entry-title { 
-      font-size: 22px; 
+    .chapter-title::after {
+      content: "✦";
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #f8f0e3;
+      padding: 0 10px;
+      color: #5d4037;
+      font-size: 18px;
+    }
+    
+    .gist-title { 
+      font-size: 20px; 
       font-weight: bold; 
       margin-top: 25px; 
-      margin-bottom: 15px; 
-      color: #8b0000;
+      margin-bottom: 10px; 
+      color: #5d4037;
       padding-left: 15px;
-      border-left: 3px solid #d4b483;
+      border-left: 3px solid #8d6e63;
+    }
+    
+    .page p { 
+      white-space: pre-line; 
+      line-height: 1.7;
+      margin-bottom: 15px;
+      text-align: justify;
+      font-size: 18px;
     }
     
     .entry-date {
       font-style: italic;
-      color: #8b5a2b;
-      margin-bottom: 15px;
+      color: #8d6e63;
+      margin-bottom: 10px;
       display: block;
-      font-size: 17px;
-      text-align: center;
-    }
-    
-    .book-spine {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      width: 20px;
-      height: 100%;
-      background: linear-gradient(to right, #5c3317 0%, #8b5a2b 10%, #a67b5b 50%, #8b5a2b 90%, #5c3317 100%);
-      transform: translateX(-50%);
-      z-index: 2;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+      font-size: 16px;
     }
     
     .controls {
-      position: absolute;
-      bottom: -50px;
-      left: 0;
-      right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 30px;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid rgba(141, 110, 99, 0.3);
+      position: relative;
+      z-index: 2;
     }
     
     button { 
-      padding: 10px 25px; 
+      padding: 10px 20px; 
       border: none; 
       border-radius: 5px; 
-      background: #8b0000; 
-      color: #fff8dc; 
+      background: #8d6e63; 
+      color: #fff; 
       cursor: pointer; 
       font-family: inherit;
       font-size: 16px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
     
     button:hover {
-      background: #a52a2a;
+      background: #6d4c41;
       transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
     
     button:active {
@@ -166,7 +237,7 @@
     }
     
     button:disabled {
-      background: #cc9999;
+      background: #d7ccc8;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
@@ -174,114 +245,107 @@
     
     #page-indicator {
       font-size: 16px;
-      color: #fff8dc;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-      background: rgba(92, 51, 23, 0.8);
-      padding: 8px 20px;
-      border-radius: 20px;
+      color: #8d6e63;
     }
     
-    .book-cover {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: linear-gradient(135deg, #5c3317 0%, #8b5a2b 100%);
-      border-radius: 15px;
+    .theme-selector {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-      color: #fff8dc;
-      box-shadow: 0 0 25px rgba(0,0,0,0.5);
-      padding: 40px;
-      text-align: center;
-      z-index: 5;
-    }
-    
-    .book-title {
-      font-size: 46px;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-      letter-spacing: 2px;
-    }
-    
-    .book-subtitle {
-      font-size: 24px;
-      font-style: italic;
-      margin-bottom: 40px;
-    }
-    
-    .decoration {
-      width: 100px;
-      height: 100px;
-      border: 4px solid #d4b483;
-      border-radius: 50%;
-      margin-bottom: 40px;
+      margin: 15px 0;
+      gap: 10px;
       position: relative;
+      z-index: 2;
     }
     
-    .decoration::before, .decoration::after {
-      content: '';
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      border: 2px solid #d4b483;
+    .theme-btn {
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
-      top: 6px;
-      left: 6px;
+      cursor: pointer;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #eee;
+      transition: all 0.2s ease;
+    }
+    
+    .theme-btn.active {
+      box-shadow: 0 0 0 2px #8d6e63;
+    }
+    
+    .theme-classic { background: #f8f0e3; color: #333; }
+    .theme-sepia { background: #f5ecd8; color: #5c4b37; }
+    .theme-dark { background: #2c2c2c; color: #e0e0e0; }
+    .theme-pink { background: #fdf6f9; color: #333; }
+    
+    .heart {
+      display: inline-block;
+      animation: pulse 2s infinite;
+      margin: 0 5px;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    
+    .footer-note {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: #8d6e63;
+      position: relative;
+      z-index: 2;
+    }
+    
+    /* Print styles */
+    @media print {
+      body { background: white; }
+      #diary-container { 
+        box-shadow: none; 
+        width: 100%;
+        height: auto;
+        max-width: none;
+      }
+      button, .theme-selector, .footer-note { display: none; }
     }
     
     /* Responsive design */
-    @media (max-width: 768px) {
-      .book {
-        flex-direction: column;
-      }
-      
-      .page-container {
+    @media (max-width: 900px) {
+      .book-container {
         width: 100%;
-        height: 50%;
-        padding: 15px;
+        height: 500px;
       }
       
-      .page-content {
-        font-size: 16px;
-        padding: 10px;
+      #diary-container {
+        height: 85vh;
+        padding: 30px;
+      }
+      
+      .diary-title {
+        font-size: 28px;
       }
       
       .chapter-title {
         font-size: 22px;
       }
       
-      .entry-title {
-        font-size: 19px;
-      }
-      
-      .page-content p {
+      .page p {
         font-size: 16px;
       }
       
       button {
-        padding: 8px 20px;
+        padding: 8px 16px;
         font-size: 14px;
       }
-      
-      .book-title {
-        font-size: 36px;
+    }
+    
+    @media (max-width: 600px) {
+      #diary-container {
+        padding: 20px 25px;
       }
       
-      .book-subtitle {
-        font-size: 20px;
-      }
-      
-      .book-spine {
-        width: 100%;
-        height: 20px;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        background: linear-gradient(to bottom, #5c3317 0%, #8b5a2b 10%, #a67b5b 50%, #8b5a2b 90%, #5c3317 100%);
+      .diary-title {
+        font-size: 24px;
       }
     }
   </style>
@@ -289,117 +353,161 @@
 </head>
 <body>
   <div class="book-container">
-    <div class="book-spine"></div>
     <div class="book">
-      <div class="page-container">
-        <div class="page left-page book-cover">
-          <div class="decoration"></div>
-          <h1 class="book-title">My Diary</h1>
-          <p class="book-subtitle">For your eyes only, my love</p>
+      <div id="diary-container">
+        <div class="diary-header">
+          <h1 class="diary-title">My Diary <span class="heart">💖</span></h1>
+          <p class="diary-subtitle">For your eyes only, my love</p>
         </div>
-      </div>
-      <div class="page-container">
-        <div class="page right-page">
-          <div class="page-content" id="content-area">
-            <!-- Diary content will be inserted here -->
-          </div>
+        
+        <div class="theme-selector">
+          <div class="theme-btn active" data-theme="theme-classic" style="background: #f8f0e3;"></div>
+          <div class="theme-btn" data-theme="theme-sepia" style="background: #f5ecd8;"></div>
+          <div class="theme-btn" data-theme="theme-dark" style="background: #2c2c2c;"></div>
+          <div class="theme-btn" data-theme="theme-pink" style="background: #fdf6f9;"></div>
         </div>
+        
+        <div id="content-area">
+          <!-- Pages will be inserted here -->
+        </div>
+        
+        <div class="controls">
+          <button id="prev">← Previous</button>
+          <span id="page-indicator">Page 1 of 1</span>
+          <button id="next">Next →</button>
+        </div>
+        
+        <p class="footer-note">Made with <span class="heart">💖</span> for my beloved</p>
       </div>
-    </div>
-    
-    <div class="controls">
-      <button id="prev">← Previous Page</button>
-      <span id="page-indicator">Page 1 of 1</span>
-      <button id="next">Next Page →</button>
     </div>
   </div>
 
   <script>
-    // Sample diary content - in a real implementation, this would come from your gists
-    const diaryContent = [
+    const chapters = [
       {
-        type: "chapter",
         title: "Chapter 1: Beginnings",
-        content: ""
-      },
-      {
-        type: "entry",
-        title: "Early Memories",
-        date: "March 12, 1995",
-        content: "I remember the old oak tree in our backyard, its branches stretching toward the sky like gnarled fingers. Under that tree, I spent countless afternoons reading books far beyond my years, escaping into worlds more interesting than my own.\n\nGrandma would bring me lemonade, her apron dusted with flour from the morning's baking. She never questioned why a child would prefer Tolstoy to cartoons, only smiled and said, 'You have an old soul, my dear.'"
-      },
-      {
-        type: "entry",
-        title: "First Day of School",
-        date: "September 5, 2000",
-        content: "The classroom smelled of chalk dust and anxiety. Twenty small desks arranged in neat rows, each occupied by a child trying desperately to appear braver than they felt.\n\nI sat near the window, watching the leaves dance in the breeze, preferring their company to the nervous chatter of my classmates. Mrs. Thompson, with her kind eyes and gentle voice, placed a book on my desk. 'I think you'll like this one,' she whispered. It was my first taste of validation."
-      },
-      {
-        type: "chapter",
-        title: "Chapter 2: Growing Up",
-        content: ""
-      },
-      {
-        type: "entry",
-        title: "The Silent River",
-        date: "June 18, 2005",
-        content: "The morning mist clung to the edges of the river, curling around the reeds like fingers reaching for something long lost. It was the kind of silence that pressed against your chest, filling the spaces between your thoughts with a quiet insistence.\n\nI came here often, to this forgotten stretch of water where time seemed to slow its relentless march. Here, I could breathe without the weight of expectations, without the constant need to be someone I wasn't."
-      },
-      {
-        type: "entry",
-        title: "High School Graduation",
-        date: "May 25, 2010",
-        content: "As I stood on that stage, diploma in hand, I realized I was closing a chapter I'd never properly read. The applause felt distant, like thunder from a storm already passed.\n\nLater, Dad hugged me tighter than usual. 'Your mother would have been proud,' he said, his voice thick with emotion. I nodded, unable to speak around the lump in my throat. Some achievements are bittersweet, flavored with the absence of those who should have been there to celebrate."
-      },
-      {
-        type: "chapter",
-        title: "Chapter 3: Meeting You",
-        content: ""
-      },
-      {
-        type: "entry",
-        title: "First Glimpse",
-        date: "October 3, 2015",
-        content: "You were standing by the coffee machine, looking decidedly unimpressed with the mediocre office brew. I noticed the way your eyes crinkled at the corners when you frowned, the way you tapped your fingers absently against the counter.\n\nWhen you finally looked up and caught me staring, I expected embarrassment to wash over me. Instead, you smiled—a slow, genuine curve of lips that seemed to say, 'I've been waiting for you.'"
-      },
-      {
-        type: "entry",
-        title: "Our First Date",
-        date: "October 10, 2015",
-        content: "Raindrops traced paths down the restaurant window as we talked for hours about everything and nothing. You confessed your irrational fear of pigeons, and I admitted my secret love for bad romantic comedies.\n\nWhen we stepped outside, you offered me your jacket without a word, your gesture more eloquent than any poetry I'd ever read. Under the streetlight, with rain glittering in your hair, I knew I was in trouble—the wonderful, terrifying kind that changes everything."
+        gists: [
+          { title: "Entry 1", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
+          { title: "Entry 2", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
+        ]
       }
     ];
 
+    const LINES_PER_PAGE = 120;
     const contentArea = document.getElementById("content-area");
     let pages = [];
     let currentPage = 0;
 
-    function formatContent() {
-      let html = '';
+    // Theme management
+    function setTheme(themeName) {
+      document.body.className = themeName;
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === themeName);
+      });
+      localStorage.setItem('diaryTheme', themeName);
       
-      for (const item of diaryContent) {
-        if (item.type === "chapter") {
-          html += `<div class="chapter-title">${item.title}</div>`;
-        } else if (item.type === "entry") {
-          html += `<div class="entry-title">${item.title}</div>`;
-          html += `<span class="entry-date">${item.date}</span>`;
-          // Split content into paragraphs based on line breaks
-          const paragraphs = item.content.split('\n\n');
-          paragraphs.forEach(paragraph => {
-            html += `<p>${paragraph}</p>`;
-          });
+      // Update page colors based on theme
+      const isDarkTheme = themeName === 'theme-dark';
+      const textColor = isDarkTheme ? '#e0e0e0' : '#333';
+      const borderColor = isDarkTheme ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+      
+      document.documentElement.style.setProperty('--text-color', textColor);
+      document.documentElement.style.setProperty('--border-color', borderColor);
+    }
+
+    // Load saved theme or default
+    const savedTheme = localStorage.getItem('diaryTheme') || 'theme-classic';
+    setTheme(savedTheme);
+
+    // Theme selector event listeners
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => setTheme(btn.dataset.theme));
+    });
+
+    async function loadDiary() {
+      try {
+        for (let chapter of chapters) {
+          let chapterContent = [];
+          chapterContent.push(`chapter-title:${chapter.title}`);
+          
+          for (let gist of chapter.gists) {
+            try {
+              const res = await fetch(gist.url);
+              let text = await res.text();
+              const lines = text.split('\n');
+              let theme = 'theme-classic';
+              
+              if (lines[0].startsWith('theme:')) {
+                theme = 'theme-' + lines[0].split(':')[1].trim();
+                lines.shift();
+              }
+              
+              // Add gist title
+              chapterContent.push(`gist-title:${gist.title}`);
+              
+              // Check if first line is a date
+              if (lines[0].match(/\d{4}-\d{2}-\d{2}/)) {
+                chapterContent.push(`entry-date:${lines[0]}`);
+                lines.shift();
+              }
+              
+              // Append all lines
+              chapterContent.push(...lines);
+            } catch (err) {
+              console.error("Failed to fetch gist:", gist.url, err);
+              chapterContent.push(`Failed to load: ${gist.title}`);
+            }
+          }
+
+          // Now split chapterContent into pages of LINES_PER_PAGE
+          let tempLines = [...chapterContent];
+          while (tempLines.length > 0) {
+            const pageLines = tempLines.splice(0, LINES_PER_PAGE);
+            const pageDiv = document.createElement("div");
+            pageDiv.className = `page theme-classic`;
+            
+            let htmlContent = "";
+            for (let line of pageLines) {
+              if (line.startsWith("chapter-title:")) {
+                htmlContent += `<div class="chapter-title">${line.replace("chapter-title:", "")}</div>`;
+              } else if (line.startsWith("gist-title:")) {
+                htmlContent += `<div class="gist-title">${line.replace("gist-title:", "")}</div>`;
+              } else if (line.startsWith("entry-date:")) {
+                htmlContent += `<span class="entry-date">${line.replace("entry-date:", "")}</span>`;
+              } else if (line.startsWith("theme-")) {
+                pageDiv.className = `page ${line}`;
+              } else {
+                htmlContent += `<p>${line}</p>`;
+              }
+            }
+            
+            pageDiv.innerHTML = htmlContent;
+            contentArea.appendChild(pageDiv);
+            pages.push(pageDiv);
+          }
         }
+        
+        if (pages.length === 0) {
+          contentArea.innerHTML = `<div class="page active"><p>No entries found. Please check your gist URLs.</p></div>`;
+          pages = [contentArea.firstElementChild];
+        } else {
+          showPage(0);
+          updatePageIndicator();
+        }
+      } catch (error) {
+        console.error("Error loading diary:", error);
+        contentArea.innerHTML = `<div class="page active"><p>Error loading diary content. Please try again later.</p></div>`;
       }
-      
-      return html;
     }
 
     function showPage(index) {
-      // For a real book, we would split content into multiple pages
-      // For this demo, we're showing all content on one page
-      contentArea.innerHTML = formatContent();
-      
+      pages.forEach((p, i) => p.classList.toggle('active', i === index));
       currentPage = index;
+      
+      // Update button states
+      document.getElementById("prev").disabled = currentPage === 0;
+      document.getElementById("next").disabled = currentPage === pages.length - 1;
+      
       updatePageIndicator();
     }
 
@@ -408,29 +516,24 @@
     }
 
     document.getElementById("next").addEventListener("click", () => {
-      if (currentPage < pages.length - 1) {
-        showPage(currentPage + 1);
-      }
+      if (currentPage < pages.length - 1) showPage(currentPage + 1);
     });
 
     document.getElementById("prev").addEventListener("click", () => {
-      if (currentPage > 0) {
-        showPage(currentPage - 1);
-      }
+      if (currentPage > 0) showPage(currentPage - 1);
     });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
+      if (e.key === 'ArrowRight') {
         if (currentPage < pages.length - 1) showPage(currentPage + 1);
-      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      } else if (e.key === 'ArrowLeft') {
         if (currentPage > 0) showPage(currentPage - 1);
       }
     });
 
     // Initialize
-    pages = [1]; // For this demo, we have one page
-    showPage(0);
+    loadDiary();
   </script>
 </body>
 </html>
