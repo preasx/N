@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Diary for You 💖</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/4.1.0/turn.min.js"></script>
+  <style>
+    body { background: #fdf6f9; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+    #book { width: 90%; height: 90%; }
+    .page { padding: 30px; font-family: 'Georgia', serif; font-size: 18px; line-height: 1.6; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+    /* Themes */
+    .theme-black-slow { background: #000; color: #fff; }
+    .theme-white-slow { background: #fff; color: #000; }
+    h2 { text-align: center; margin-bottom: 20px; color: #e91e63; }
+  </style>
+</head>
+<body>
+  <div id="book"></div>
+
+  <script>
+    const entries = [
+      { title: "Entry 1", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
+      { title: "Entry 2", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
+    ];
+
+    async function loadDiary() {
+      const book = document.getElementById("book");
+      for (let e of entries) {
+        try {
+          const res = await fetch(e.url);
+          const text = await res.text();
+          const lines = text.split('\n');
+          let theme = 'theme-white-slow'; // default theme
+          if (lines[0].startsWith('theme:')) {
+            theme = 'theme-' + lines[0].split(':')[1].trim();
+            lines.shift(); // remove theme line
+          }
+          const content = lines.join('<br>');
+          const page = document.createElement("div");
+          page.className = `page ${theme}`;
+          page.innerHTML = `<h2>${e.title}</h2><p>${content}</p>`;
+          book.appendChild(page);
+        } catch (err) {
+          console.error("Failed to fetch gist:", e.url, err);
+        }
+      }
+      $('#book').turn({ gradients: true, acceleration: true });
+    }
+
+    loadDiary();
+  </script>
+</body>
+</html>
