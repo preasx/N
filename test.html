@@ -73,7 +73,6 @@
       width: 90%;
       max-width: 900px;
       height: 85vh;
-      perspective: 2000px;
       position: relative;
     }
     
@@ -81,37 +80,52 @@
       position: relative;
       width: 100%;
       height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.5s;
+      display: flex;
+      background: #5c3317;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    
+    .page-container {
+      width: 50%;
+      height: 100%;
+      padding: 15px;
+      box-sizing: border-box;
+      position: relative;
     }
     
     .page {
-      position: absolute;
       width: 100%;
       height: 100%;
-      top: 0;
-      left: 0;
       background: #fff8dc;
-      padding: 40px;
+      padding: 30px;
       overflow: hidden;
       box-sizing: border-box;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       border: 1px solid #d4b483;
       display: flex;
       flex-direction: column;
-      justify-content: center;
+    }
+    
+    .left-page {
+      border-radius: 8px 3px 3px 8px;
+    }
+    
+    .right-page {
+      border-radius: 3px 8px 8px 3px;
     }
     
     .page-content {
       height: 100%;
       overflow: hidden;
-      font-size: 22px;
-      line-height: 1.6;
+      font-size: 18px;
+      line-height: 1.5;
       color: #5c3317;
       text-align: justify;
-      padding: 20px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, transparent 10%);
-      background-size: 100% 30px;
+      padding: 15px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, transparent 8%);
+      background-size: 100% 24px;
       position: relative;
     }
     
@@ -119,57 +133,46 @@
       content: '';
       position: absolute;
       top: 0;
-      left: 50px;
-      width: 2px;
+      left: 40px;
+      width: 1px;
       height: 100%;
       background: rgba(139, 0, 0, 0.1);
     }
     
-    .page-left {
-      border-radius: 10px 3px 3px 10px;
-      transform-origin: right center;
-    }
-    
-    .page-right {
-      border-radius: 3px 10px 10px 3px;
-      transform-origin: left center;
-      left: 50%;
-    }
-    
     .chapter-title { 
       text-align: center; 
-      font-size: 32px; 
+      font-size: 26px; 
       font-weight: bold; 
       color: #8b0000; 
-      margin-bottom: 25px; 
-      padding-bottom: 10px;
+      margin-bottom: 20px; 
+      padding-bottom: 8px;
       border-bottom: 2px solid #d4b483;
     }
     
     .gist-title { 
-      font-size: 26px; 
+      font-size: 22px; 
       font-weight: bold; 
-      margin-top: 30px; 
-      margin-bottom: 15px; 
+      margin-top: 25px; 
+      margin-bottom: 12px; 
       color: #8b0000;
-      padding-left: 15px;
-      border-left: 4px solid #d4b483;
+      padding-left: 12px;
+      border-left: 3px solid #d4b483;
     }
     
     .page-content p { 
       white-space: pre-line; 
-      line-height: 1.6;
-      margin-bottom: 20px;
+      line-height: 1.5;
+      margin-bottom: 15px;
       text-align: justify;
-      font-size: 22px;
+      font-size: 18px;
     }
     
     .entry-date {
       font-style: italic;
       color: #8b5a2b;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       display: block;
-      font-size: 20px;
+      font-size: 17px;
       text-align: center;
     }
     
@@ -177,13 +180,12 @@
       position: absolute;
       left: 50%;
       top: 0;
-      width: 20px;
+      width: 16px;
       height: 100%;
       background: linear-gradient(to right, #5c3317 0%, #8b5a2b 10%, #a67b5b 50%, #8b5a2b 90%, #5c3317 100%);
       transform: translateX(-50%);
-      z-index: -1;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-      border-radius: 2px;
+      z-index: 2;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
     }
     
     .controls {
@@ -194,20 +196,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 40px;
+      padding: 0 30px;
+      z-index: 10;
     }
     
     button { 
-      padding: 12px 25px; 
+      padding: 10px 20px; 
       border: none; 
       border-radius: 5px; 
       background: #8b0000; 
       color: #fff8dc; 
       cursor: pointer; 
       font-family: inherit;
-      font-size: 18px;
+      font-size: 16px;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      z-index: 10;
     }
     
     button:hover {
@@ -228,9 +232,12 @@
     }
     
     #page-indicator {
-      font-size: 18px;
+      font-size: 16px;
       color: #fff8dc;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+      background: rgba(92, 51, 23, 0.8);
+      padding: 5px 15px;
+      border-radius: 15px;
     }
     
     .book-cover {
@@ -249,34 +256,35 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
       padding: 40px;
       text-align: center;
+      z-index: 5;
     }
     
     .book-title {
-      font-size: 48px;
-      margin-bottom: 20px;
+      font-size: 42px;
+      margin-bottom: 15px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     }
     
     .book-subtitle {
-      font-size: 24px;
+      font-size: 22px;
       font-style: italic;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
     
     .decoration {
-      width: 100px;
-      height: 100px;
-      border: 4px solid #d4b483;
+      width: 80px;
+      height: 80px;
+      border: 3px solid #d4b483;
       border-radius: 50%;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       position: relative;
     }
     
     .decoration::before, .decoration::after {
       content: '';
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 60px;
+      height: 60px;
       border: 2px solid #d4b483;
       border-radius: 50%;
       top: 6px;
@@ -285,34 +293,58 @@
     
     /* Responsive design */
     @media (max-width: 768px) {
+      .book {
+        flex-direction: column;
+      }
+      
+      .page-container {
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+      }
+      
       .page-content {
-        font-size: 18px;
-        padding: 15px;
+        font-size: 16px;
+        padding: 10px;
+        background-size: 100% 20px;
+      }
+      
+      .page-content::before {
+        left: 30px;
       }
       
       .chapter-title {
-        font-size: 28px;
-      }
-      
-      .gist-title {
         font-size: 22px;
       }
       
-      .page-content p {
-        font-size: 18px;
+      .gist-title {
+        font-size: 19px;
       }
       
-      button {
-        padding: 10px 20px;
+      .page-content p {
         font-size: 16px;
       }
       
+      button {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
       .book-title {
-        font-size: 36px;
+        font-size: 32px;
       }
       
       .book-subtitle {
-        font-size: 20px;
+        font-size: 18px;
+      }
+      
+      .book-spine {
+        width: 100%;
+        height: 16px;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: linear-gradient(to bottom, #5c3317 0%, #8b5a2b 10%, #a67b5b 50%, #8b5a2b 90%, #5c3317 100%);
       }
     }
   </style>
@@ -328,22 +360,26 @@
   <div class="book-container">
     <div class="book-spine"></div>
     <div class="book">
-      <div class="page page-left book-cover">
-        <div class="decoration"></div>
-        <h1 class="book-title">My Diary</h1>
-        <p class="book-subtitle">For your eyes only, my love</p>
+      <div class="page-container">
+        <div class="page left-page book-cover">
+          <div class="decoration"></div>
+          <h1 class="book-title">My Diary</h1>
+          <p class="book-subtitle">For your eyes only, my love</p>
+        </div>
       </div>
-      <div class="page page-right">
-        <div class="page-content" id="content-area">
-          <!-- Pages will be inserted here -->
+      <div class="page-container">
+        <div class="page right-page">
+          <div class="page-content" id="content-area">
+            <!-- Pages will be inserted here -->
+          </div>
         </div>
       </div>
     </div>
     
     <div class="controls">
-      <button id="prev">← Previous Page</button>
+      <button id="prev">← Previous</button>
       <span id="page-indicator">Page 1 of 1</span>
-      <button id="next">Next Page →</button>
+      <button id="next">Next →</button>
     </div>
   </div>
 
@@ -362,10 +398,24 @@
           { title: "High School Days", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
           { title: "College Years", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
         ]
+      },
+      {
+        title: "Chapter 3: Discovering Myself",
+        gists: [
+          { title: "First Job", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
+          { title: "Travel Experiences", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
+        ]
+      },
+      {
+        title: "Chapter 4: Meeting You",
+        gists: [
+          { title: "First Impressions", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
+          { title: "Our First Date", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
+        ]
       }
     ];
 
-    const LINES_PER_PAGE = 30;
+    const LINES_PER_PAGE = 40;
     const contentArea = document.getElementById("content-area");
     let pages = [];
     let currentPage = 0;
