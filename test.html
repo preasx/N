@@ -24,55 +24,10 @@
       overflow: hidden;
     }
     
-    #start-screen {
-      text-align: center;
-      max-width: 500px;
-      padding: 40px;
-      background: rgba(255, 245, 225, 0.95);
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border: 2px solid #d4b483;
-      z-index: 100;
-    }
-    
-    #start-screen h1 {
-      font-size: 42px;
-      color: #8b0000;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
-    
-    #start-screen p {
-      font-size: 20px;
-      margin-bottom: 30px;
-      line-height: 1.6;
-      color: #5c3317;
-    }
-    
-    #start-button {
-      padding: 15px 40px;
-      font-size: 20px;
-      background: #8b0000;
-      color: #fff8dc;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.3s;
-      box-shadow: 0 4px 8px rgba(139, 0, 0, 0.3);
-    }
-    
-    #start-button:hover {
-      background: #a52a2a;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 12px rgba(139, 0, 0, 0.4);
-    }
-    
     .book-container {
-      display: none;
       width: 90%;
-      max-width: 900px;
-      height: 85vh;
+      max-width: 800px;
+      height: 80vh;
       position: relative;
     }
     
@@ -82,15 +37,15 @@
       height: 100%;
       display: flex;
       background: #5c3317;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6);
       overflow: hidden;
     }
     
     .page-container {
       width: 50%;
       height: 100%;
-      padding: 15px;
+      padding: 20px;
       box-sizing: border-box;
       position: relative;
     }
@@ -98,22 +53,22 @@
     .page {
       width: 100%;
       height: 100%;
-      background: #fff8dc;
-      padding: 30px;
+      background: #f8f0e0;
+      padding: 35px 40px;
       overflow: hidden;
       box-sizing: border-box;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
       border: 1px solid #d4b483;
       display: flex;
       flex-direction: column;
     }
     
     .left-page {
-      border-radius: 8px 3px 3px 8px;
+      border-radius: 10px 5px 5px 10px;
     }
     
     .right-page {
-      border-radius: 3px 8px 8px 3px;
+      border-radius: 5px 10px 10px 5px;
     }
     
     .page-content {
@@ -124,39 +79,7 @@
       color: #5c3317;
       text-align: justify;
       padding: 15px;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.03) 0%, transparent 8%);
-      background-size: 100% 24px;
       position: relative;
-    }
-    
-    .page-content::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 40px;
-      width: 1px;
-      height: 100%;
-      background: rgba(139, 0, 0, 0.1);
-    }
-    
-    .chapter-title { 
-      text-align: center; 
-      font-size: 26px; 
-      font-weight: bold; 
-      color: #8b0000; 
-      margin-bottom: 20px; 
-      padding-bottom: 8px;
-      border-bottom: 2px solid #d4b483;
-    }
-    
-    .gist-title { 
-      font-size: 22px; 
-      font-weight: bold; 
-      margin-top: 25px; 
-      margin-bottom: 12px; 
-      color: #8b0000;
-      padding-left: 12px;
-      border-left: 3px solid #d4b483;
     }
     
     .page-content p { 
@@ -167,10 +90,30 @@
       font-size: 18px;
     }
     
+    .chapter-title { 
+      text-align: center; 
+      font-size: 26px; 
+      font-weight: bold; 
+      color: #8b0000; 
+      margin-bottom: 25px; 
+      padding-bottom: 10px;
+      border-bottom: 2px solid #d4b483;
+    }
+    
+    .entry-title { 
+      font-size: 22px; 
+      font-weight: bold; 
+      margin-top: 25px; 
+      margin-bottom: 15px; 
+      color: #8b0000;
+      padding-left: 15px;
+      border-left: 3px solid #d4b483;
+    }
+    
     .entry-date {
       font-style: italic;
       color: #8b5a2b;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       display: block;
       font-size: 17px;
       text-align: center;
@@ -180,28 +123,27 @@
       position: absolute;
       left: 50%;
       top: 0;
-      width: 16px;
+      width: 20px;
       height: 100%;
       background: linear-gradient(to right, #5c3317 0%, #8b5a2b 10%, #a67b5b 50%, #8b5a2b 90%, #5c3317 100%);
       transform: translateX(-50%);
       z-index: 2;
-      box-shadow: inset 0 0 8px rgba(0,0,0,0.5);
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
     }
     
     .controls {
       position: absolute;
-      bottom: 20px;
+      bottom: -50px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 0 30px;
-      z-index: 10;
     }
     
     button { 
-      padding: 10px 20px; 
+      padding: 10px 25px; 
       border: none; 
       border-radius: 5px; 
       background: #8b0000; 
@@ -211,7 +153,6 @@
       font-size: 16px;
       transition: all 0.3s ease;
       box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      z-index: 10;
     }
     
     button:hover {
@@ -236,8 +177,8 @@
       color: #fff8dc;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
       background: rgba(92, 51, 23, 0.8);
-      padding: 5px 15px;
-      border-radius: 15px;
+      padding: 8px 20px;
+      border-radius: 20px;
     }
     
     .book-cover {
@@ -247,44 +188,45 @@
       top: 0;
       left: 0;
       background: linear-gradient(135deg, #5c3317 0%, #8b5a2b 100%);
-      border-radius: 10px;
+      border-radius: 15px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       color: #fff8dc;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      box-shadow: 0 0 25px rgba(0,0,0,0.5);
       padding: 40px;
       text-align: center;
       z-index: 5;
     }
     
     .book-title {
-      font-size: 42px;
-      margin-bottom: 15px;
+      font-size: 46px;
+      margin-bottom: 20px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+      letter-spacing: 2px;
     }
     
     .book-subtitle {
-      font-size: 22px;
+      font-size: 24px;
       font-style: italic;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
     
     .decoration {
-      width: 80px;
-      height: 80px;
-      border: 3px solid #d4b483;
+      width: 100px;
+      height: 100px;
+      border: 4px solid #d4b483;
       border-radius: 50%;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
       position: relative;
     }
     
     .decoration::before, .decoration::after {
       content: '';
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border: 2px solid #d4b483;
       border-radius: 50%;
       top: 6px;
@@ -300,24 +242,19 @@
       .page-container {
         width: 100%;
         height: 50%;
-        padding: 10px;
+        padding: 15px;
       }
       
       .page-content {
         font-size: 16px;
         padding: 10px;
-        background-size: 100% 20px;
-      }
-      
-      .page-content::before {
-        left: 30px;
       }
       
       .chapter-title {
         font-size: 22px;
       }
       
-      .gist-title {
+      .entry-title {
         font-size: 19px;
       }
       
@@ -326,21 +263,21 @@
       }
       
       button {
-        padding: 8px 16px;
+        padding: 8px 20px;
         font-size: 14px;
       }
       
       .book-title {
-        font-size: 32px;
+        font-size: 36px;
       }
       
       .book-subtitle {
-        font-size: 18px;
+        font-size: 20px;
       }
       
       .book-spine {
         width: 100%;
-        height: 16px;
+        height: 20px;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
@@ -351,12 +288,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="start-screen">
-    <h1>My Diary Book 💖</h1>
-    <p>A journey through my life, thoughts, and memories</p>
-    <button id="start-button">Open Diary</button>
-  </div>
-
   <div class="book-container">
     <div class="book-spine"></div>
     <div class="book">
@@ -370,158 +301,110 @@
       <div class="page-container">
         <div class="page right-page">
           <div class="page-content" id="content-area">
-            <!-- Pages will be inserted here -->
+            <!-- Diary content will be inserted here -->
           </div>
         </div>
       </div>
     </div>
     
     <div class="controls">
-      <button id="prev">← Previous</button>
+      <button id="prev">← Previous Page</button>
       <span id="page-indicator">Page 1 of 1</span>
-      <button id="next">Next →</button>
+      <button id="next">Next Page →</button>
     </div>
   </div>
 
   <script>
-    const chapters = [
+    // Sample diary content - in a real implementation, this would come from your gists
+    const diaryContent = [
       {
+        type: "chapter",
         title: "Chapter 1: Beginnings",
-        gists: [
-          { title: "Early Memories", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
-          { title: "Childhood Dreams", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
-        ]
+        content: ""
       },
       {
+        type: "entry",
+        title: "Early Memories",
+        date: "March 12, 1995",
+        content: "I remember the old oak tree in our backyard, its branches stretching toward the sky like gnarled fingers. Under that tree, I spent countless afternoons reading books far beyond my years, escaping into worlds more interesting than my own.\n\nGrandma would bring me lemonade, her apron dusted with flour from the morning's baking. She never questioned why a child would prefer Tolstoy to cartoons, only smiled and said, 'You have an old soul, my dear.'"
+      },
+      {
+        type: "entry",
+        title: "First Day of School",
+        date: "September 5, 2000",
+        content: "The classroom smelled of chalk dust and anxiety. Twenty small desks arranged in neat rows, each occupied by a child trying desperately to appear braver than they felt.\n\nI sat near the window, watching the leaves dance in the breeze, preferring their company to the nervous chatter of my classmates. Mrs. Thompson, with her kind eyes and gentle voice, placed a book on my desk. 'I think you'll like this one,' she whispered. It was my first taste of validation."
+      },
+      {
+        type: "chapter",
         title: "Chapter 2: Growing Up",
-        gists: [
-          { title: "High School Days", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
-          { title: "College Years", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
-        ]
+        content: ""
       },
       {
-        title: "Chapter 3: Discovering Myself",
-        gists: [
-          { title: "First Job", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
-          { title: "Travel Experiences", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
-        ]
+        type: "entry",
+        title: "The Silent River",
+        date: "June 18, 2005",
+        content: "The morning mist clung to the edges of the river, curling around the reeds like fingers reaching for something long lost. It was the kind of silence that pressed against your chest, filling the spaces between your thoughts with a quiet insistence.\n\nI came here often, to this forgotten stretch of water where time seemed to slow its relentless march. Here, I could breathe without the weight of expectations, without the constant need to be someone I wasn't."
       },
       {
-        title: "Chapter 4: Meeting You",
-        gists: [
-          { title: "First Impressions", url: "https://gist.githubusercontent.com/preasx/7240dedb381f2dc484d26c48a4376829/raw" },
-          { title: "Our First Date", url: "https://gist.githubusercontent.com/preasx/bd3e2284a39a435993b0191a48bf1335/raw" }
-        ]
+        type: "entry",
+        title: "High School Graduation",
+        date: "May 25, 2010",
+        content: "As I stood on that stage, diploma in hand, I realized I was closing a chapter I'd never properly read. The applause felt distant, like thunder from a storm already passed.\n\nLater, Dad hugged me tighter than usual. 'Your mother would have been proud,' he said, his voice thick with emotion. I nodded, unable to speak around the lump in my throat. Some achievements are bittersweet, flavored with the absence of those who should have been there to celebrate."
+      },
+      {
+        type: "chapter",
+        title: "Chapter 3: Meeting You",
+        content: ""
+      },
+      {
+        type: "entry",
+        title: "First Glimpse",
+        date: "October 3, 2015",
+        content: "You were standing by the coffee machine, looking decidedly unimpressed with the mediocre office brew. I noticed the way your eyes crinkled at the corners when you frowned, the way you tapped your fingers absently against the counter.\n\nWhen you finally looked up and caught me staring, I expected embarrassment to wash over me. Instead, you smiled—a slow, genuine curve of lips that seemed to say, 'I've been waiting for you.'"
+      },
+      {
+        type: "entry",
+        title: "Our First Date",
+        date: "October 10, 2015",
+        content: "Raindrops traced paths down the restaurant window as we talked for hours about everything and nothing. You confessed your irrational fear of pigeons, and I admitted my secret love for bad romantic comedies.\n\nWhen we stepped outside, you offered me your jacket without a word, your gesture more eloquent than any poetry I'd ever read. Under the streetlight, with rain glittering in your hair, I knew I was in trouble—the wonderful, terrifying kind that changes everything."
       }
     ];
 
-    const LINES_PER_PAGE = 40;
     const contentArea = document.getElementById("content-area");
     let pages = [];
     let currentPage = 0;
 
-    // Show start screen and setup start button
-    document.getElementById("start-button").addEventListener("click", function() {
-      document.getElementById("start-screen").style.display = "none";
-      document.querySelector(".book-container").style.display = "block";
-      loadDiary();
-    });
-
-    function showPage(index) {
-      // Hide all pages
-      const allPages = document.querySelectorAll('.page-content > div');
-      allPages.forEach(page => page.style.display = 'none');
+    function formatContent() {
+      let html = '';
       
-      // Show the current page
-      if (pages[index]) {
-        pages[index].style.display = 'block';
+      for (const item of diaryContent) {
+        if (item.type === "chapter") {
+          html += `<div class="chapter-title">${item.title}</div>`;
+        } else if (item.type === "entry") {
+          html += `<div class="entry-title">${item.title}</div>`;
+          html += `<span class="entry-date">${item.date}</span>`;
+          // Split content into paragraphs based on line breaks
+          const paragraphs = item.content.split('\n\n');
+          paragraphs.forEach(paragraph => {
+            html += `<p>${paragraph}</p>`;
+          });
+        }
       }
       
+      return html;
+    }
+
+    function showPage(index) {
+      // For a real book, we would split content into multiple pages
+      // For this demo, we're showing all content on one page
+      contentArea.innerHTML = formatContent();
+      
       currentPage = index;
-      
-      // Update button states
-      document.getElementById("prev").disabled = currentPage === 0;
-      document.getElementById("next").disabled = currentPage === pages.length - 1;
-      
       updatePageIndicator();
     }
 
     function updatePageIndicator() {
       document.getElementById("page-indicator").textContent = `Page ${currentPage + 1} of ${pages.length}`;
-    }
-
-    async function loadDiary() {
-      try {
-        for (let chapter of chapters) {
-          let chapterContent = [];
-          
-          // Add chapter title as the first element
-          chapterContent.push(`chapter-title:${chapter.title}`);
-          
-          for (let gist of chapter.gists) {
-            try {
-              const res = await fetch(gist.url);
-              let text = await res.text();
-              const lines = text.split('\n');
-              
-              // Remove theme line if present
-              if (lines[0].startsWith('theme:')) {
-                lines.shift();
-              }
-              
-              // Add gist title as a subheading
-              chapterContent.push(`gist-title:${gist.title}`);
-              
-              // Check if first line is a date
-              if (lines[0].match(/\d{4}-\d{2}-\d{2}/)) {
-                chapterContent.push(`entry-date:${lines[0]}`);
-                lines.shift();
-              }
-              
-              // Append all content lines
-              chapterContent.push(...lines);
-            } catch (err) {
-              console.error("Failed to fetch gist:", gist.url, err);
-              chapterContent.push(`Failed to load: ${gist.title}`);
-            }
-          }
-
-          // Split chapterContent into pages of LINES_PER_PAGE
-          let tempLines = [...chapterContent];
-          while (tempLines.length > 0) {
-            const pageLines = tempLines.splice(0, LINES_PER_PAGE);
-            const pageDiv = document.createElement("div");
-            pageDiv.style.display = 'none';
-            
-            let htmlContent = "";
-            for (let line of pageLines) {
-              if (line.startsWith("chapter-title:")) {
-                htmlContent += `<div class="chapter-title">${line.replace("chapter-title:", "")}</div>`;
-              } else if (line.startsWith("gist-title:")) {
-                htmlContent += `<div class="gist-title">${line.replace("gist-title:", "")}</div>`;
-              } else if (line.startsWith("entry-date:")) {
-                htmlContent += `<span class="entry-date">${line.replace("entry-date:", "")}</span>`;
-              } else {
-                htmlContent += `<p>${line}</p>`;
-              }
-            }
-            
-            pageDiv.innerHTML = htmlContent;
-            contentArea.appendChild(pageDiv);
-            pages.push(pageDiv);
-          }
-        }
-        
-        if (pages.length === 0) {
-          contentArea.innerHTML = `<div style="display:block;"><p>No entries found. Please check your gist URLs.</p></div>`;
-          pages = [contentArea.firstElementChild];
-        } else {
-          showPage(0);
-        }
-      } catch (error) {
-        console.error("Error loading diary:", error);
-        contentArea.innerHTML = `<div style="display:block;"><p>Error loading diary content. Please try again later.</p></div>`;
-      }
     }
 
     document.getElementById("next").addEventListener("click", () => {
@@ -545,8 +428,9 @@
       }
     });
 
-    // Initialize with start screen visible
-    document.getElementById("start-screen").style.display = "block";
+    // Initialize
+    pages = [1]; // For this demo, we have one page
+    showPage(0);
   </script>
 </body>
 </html>
